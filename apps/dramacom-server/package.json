@@ -1,4 +1,5 @@
 {
+  "name": "dramacom-server",
   "scripts": {
     "dev": "wrangler dev src/infra/server/entrypoint.ts",
     "deploy": "wrangler deploy --minify src/infra/server/entrypoint.ts"

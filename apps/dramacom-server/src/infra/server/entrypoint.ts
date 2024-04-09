@@ -10,7 +10,7 @@ const app = new OpenAPIHono();
 app
   .doc("/schema", {
     openapi: "3.0.0",
-    info: { version: "1.0.0", title: "dramacom" },
+    info: { version: "1.0.0", title: "dramacom-server" },
   })
   .get("/ui", swaggerUI({ url: "schema" }))
   .route("/", commentGetRoute)
