@@ -37,7 +37,7 @@ importers:
         specifier: ^3.47.0
         version: 3.48.0(@cloudflare/workers-types@4.20240405.0)
 
-  apps/web:
+  apps/dramacom-web:
     dependencies:
       '@remix-run/cloudflare':
         specifier: ^2.8.1
@@ -2750,7 +2750,7 @@ packages:
       supports-color:
         optional: true
     dependencies:
-      ms: 2.1.2
+      ms: 2.1.3
     dev: true
 
   /debug@4.3.4:

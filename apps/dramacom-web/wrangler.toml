@@ -1,4 +1,4 @@
-name = "web"
+name = "dramacom-web"
 compatibility_date = "2024-04-05"
 
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
