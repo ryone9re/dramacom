@@ -11,9 +11,6 @@ jobs:
   deploy:
     name: deploy web
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: "apps/dramacom-web"
     steps:
       - uses: actions/checkout@v4
 
@@ -31,4 +28,5 @@ jobs:
       - name: web deploy
         uses: cloudflare/wrangler-action@v3
         with:
+          path: "apps/dramacom-web"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
