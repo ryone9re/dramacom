@@ -7,6 +7,11 @@ on:
     paths:
       - "apps/dramacom-server/**"
 
+defaults:
+  run:
+    working-directory:
+      "apps/dramacom-server"
+
 jobs:
   deploy:
     name: deploy server
@@ -28,5 +33,4 @@ jobs:
       - name: server deploy
         uses: cloudflare/wrangler-action@v3
         with:
-          path: "apps/dramacom-server"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
