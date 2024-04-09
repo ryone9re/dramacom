@@ -6,7 +6,7 @@
 pnpm run dev
 ```
 
-## Deploy manually
+## Manual deploy
 
 ```sh
 pnpm run deploy
