@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "apps/dramacom-server"
+      - "apps/dramacom-server/**"
 
 jobs:
   deploy:
