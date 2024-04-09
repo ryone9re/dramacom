@@ -26,8 +26,8 @@ jobs:
       - run: pnpm install
 
       - name: server deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: "apps/dramacom-server"
-          command: pnpm run deploy
+        run: pnpm run deploy
+        working-directory: "apps/dramacom-server"
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
