@@ -11,5 +11,9 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  return <button type="button">あああ</button>;
+  return (
+    <button type="button" className="btn">
+      あああ
+    </button>
+  );
 }
