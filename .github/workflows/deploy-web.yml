@@ -28,5 +28,6 @@ jobs:
       - name: web deploy
         uses: cloudflare/wrangler-action@v3
         with:
-          workingDirectory: "apps/dramacom-web"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: "apps/dramacom-web"
+          command: pnpm run deploy
