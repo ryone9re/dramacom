@@ -9,9 +9,3 @@
 ```sh
 pnpm run dev
 ```
-
-## Manual deploy
-
-```sh
-pnpm run deploy
-```
