@@ -32,15 +32,15 @@ export const loader: LoaderFunction = async ({
 };
 
 export default function Index() {
-  const data = useLoaderData<typeof loader>();
+  const data = useLoaderData<CardData[]>();
 
   return (
     <MainLayout>
       <div className="w-full px-20">
         <SearchBar />
       </div>
-      <CardContainer label="今話題の作品" cards={data as CardData[]} />
-      <CardContainer label="お気に入り" cards={data as CardData[]} />
+      <CardContainer label="今話題の作品" cards={data} />
+      <CardContainer label="お気に入り" cards={data} />
     </MainLayout>
   );
 }
