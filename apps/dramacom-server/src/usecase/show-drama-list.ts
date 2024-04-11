@@ -8,22 +8,30 @@ type ShowDramaListInput = {
 
 type ShowDramaListOutput = {
   id: string;
+  title: string;
   description: string;
+  casts: string[];
+  director: string[];
+  thumbnail: string;
   numberOfEpisodes: number;
 }[];
 
 export async function ShowDramaList(
   repositories: { dramaRepository: DramaRepository },
-  dto: ShowDramaListInput,
+  input: ShowDramaListInput,
 ): Promise<ShowDramaListOutput> {
   const dramaList = await repositories.dramaRepository.list(
-    dto.limit,
-    dto.start ? new ID(dto.start) : undefined,
+    input.limit,
+    input.start ? new ID(input.start) : undefined,
   );
 
   const showDramaListOutput = dramaList.map((v) => ({
     id: v.identity().value(),
+    title: v.title(),
     description: v.description(),
+    casts: v.casts(),
+    director: v.director(),
+    thumbnail: v.thumbnail(),
     numberOfEpisodes: v.numberOfEpisodes(),
   }));
 

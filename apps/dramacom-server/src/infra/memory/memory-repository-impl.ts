@@ -1,16 +1,45 @@
 import type { Comment } from "../../domain/models/comment";
-import type { Drama } from "../../domain/models/drama";
+import { Drama } from "../../domain/models/drama";
 import type { User } from "../../domain/models/user";
 import type { CommentRepository } from "../../domain/repositories/comment-repository";
 import type { DramaRepository } from "../../domain/repositories/drama-repository";
 import type { UserRepository } from "../../domain/repositories/user-repository";
 import type { ID } from "../../domain/value-objects/id";
 
+// Drama.new({
+//   title: "",
+//   description: "",
+//   casts: [""],
+//   director: [""],
+//   thumbnail: "",
+//   numberOfEpisodes: 23,
+// })
+
 export class MemoryDramaRepositoryImpl implements DramaRepository {
   private memory: Drama[];
 
   constructor() {
-    this.memory = [];
+    this.memory = [
+      Drama.new({
+        title: "虎に翼",
+        description:
+          "伊藤沙莉主演で、日本初の女性弁護士で後に裁判官となった一人の女性を描く。昭和のはじめ、日本初の女性専門に法律を教える学校ができ、寅子(伊藤)らは自らの道を切り開くため法律を学んでいく。しかし、昭和13(1938)年、卒業し弁護士として世に出た彼女たちを待ち受けていたのは戦争に向かう日本だった。",
+        casts: ["尾野真千子", "伊藤沙莉", "石田ゆり子", "岡部たけし"],
+        director: ["吉田恵里香", "梛川善郎"],
+        thumbnail: "https://thetv.jp/i/pgw/program_images/0001000531_11_v.jpg",
+        numberOfEpisodes: 2,
+      }),
+      Drama.new({
+        title: "シークレット同盟",
+        description:
+          "Leroによる韓国発の同名漫画を松井愛莉主演で実写ドラマ化。大学内でも一目置かれるイケメン女子・詩杏(松井)は、男性恐怖症と母親の過干渉という悩みを抱えている。そんな詩杏の前に、突如現れた容姿端麗な大学の後輩・律子(長野凌大)。親切な彼女は、実は詩杏に好意を寄せるストーカーだった。",
+        casts: ["松井愛莉", "長野凌大", "長妻怜央", "しゅはまはるみ"],
+        director: ["レロ", "本田隆一", "大山晃一郎", "山崎佐保子", "合田純奈"],
+        thumbnail:
+          "https://thetv.jp/i/pgw/series_images/0001004362_v.jpg?w=716",
+        numberOfEpisodes: 12,
+      }),
+    ];
   }
 
   async list(limit: number, start?: ID | undefined): Promise<Drama[]> {
