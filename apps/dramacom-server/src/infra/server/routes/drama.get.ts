@@ -46,7 +46,11 @@ route.openapi(schema, async (c) => {
   return c.json(
     output.map((v) => ({
       id: v.id,
+      title: v.title,
       description: v.description,
+      casts: v.casts,
+      director: v.director,
+      thumbnail: v.thumbnail,
       number_of_episodes: v.numberOfEpisodes,
     })),
   );
