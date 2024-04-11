@@ -1,4 +1,7 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
+import SearchBar from "~/components/molecules/SearchBar";
+import CardContainer from "~/components/organisms/containers/CardContainer";
+import MainLayout from "~/components/templates/layout/MainLayout";
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,10 +13,27 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+// サンプルデータ
+const cardsData = [
+  {
+    id: 1,
+    title: "ドラマタイトル",
+    rating: 4.5,
+    imageSrc: "path-to-image.jpg",
+    description: "aaaa",
+  },
+  // ... 他のデータ
+];
+
 export default function Index() {
   return (
-    <button type="button" className="btn">
-      あああ
-    </button>
+    <MainLayout>
+      <div className="w-full px-20">
+        <SearchBar />
+      </div>
+      <CardContainer label="今話題の作品" cards={cardsData} />
+      <CardContainer label="お気に入り" cards={cardsData} />
+      <CardContainer label="なんか" cards={cardsData} />
+    </MainLayout>
   );
 }
