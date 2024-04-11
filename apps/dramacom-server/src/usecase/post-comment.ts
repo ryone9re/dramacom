@@ -20,7 +20,7 @@ export async function PostComment(
     commentRepository: CommentRepository;
   },
   input: PostCommentInput,
-) {
+): Promise<void> {
   const author = await repositories.userRepository.findByID(
     new ID(input.author),
   );
