@@ -1,5 +1,5 @@
-import DoramaDetailCard from "~/components/organisms/dorama/DoramaDetailCard";
-import EpisodeList from "~/components/organisms/dorama/DoramaEpisodeList";
+import DoramaDetailCard from "~/components/organisms/drama/DramaDetailCard";
+import EpisodeList from "~/components/organisms/drama/DramaEpisodeList";
 import MainLayout from "~/components/templates/layout/MainLayout";
 
 const doramaDetailMock = {

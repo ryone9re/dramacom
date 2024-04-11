@@ -1,4 +1,3 @@
-// components/EpisodeList.tsx
 import type React from "react";
 
 interface EpisodeProps {

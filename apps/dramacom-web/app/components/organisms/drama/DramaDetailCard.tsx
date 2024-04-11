@@ -3,14 +3,14 @@ import { LikeIcon, PlayIcon, StarIcon } from "~/components/atoms/icons";
 
 interface DoramaDetailCardProps {
   title: string;
-  subTitle: string;
+  subTitle?: string;
   imageSrc: string;
   rating: number;
   description: string;
-  screenplay: string;
-  director: string;
-  genres: string[];
-  releaseYear: number;
+  screenplay?: string;
+  director?: string;
+  genres?: string[];
+  releaseYear?: number;
 }
 
 const DoramaDetailCard: React.FC<DoramaDetailCardProps> = ({
@@ -46,12 +46,12 @@ const DoramaDetailCard: React.FC<DoramaDetailCardProps> = ({
             {rating} <StarIcon />
           </span>
           <span className="text-gray-500 inline-flex items-center leading-none text-sm">
-            {genres.join(", ")} | {releaseYear}
+            {genres?.join(", ")} | {releaseYear}
           </span>
         </div>
         <div className="flex justify-end items-center space-x-4">
-          {/* 再生ボタン */}
           <button
+            type="button"
             className="btn btn-primary flex justify-center items-center"
             onClick={() => {
               /* 再生ボタンのクリックイベントハンドラ */
@@ -60,6 +60,7 @@ const DoramaDetailCard: React.FC<DoramaDetailCardProps> = ({
             <PlayIcon />
           </button>
           <button
+            type="button"
             className="btn btn-secondary flex justify-center items-center"
             onClick={() => {
               /* お気に入りボタンのクリックイベントハンドラ */
