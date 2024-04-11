@@ -5,10 +5,25 @@ export const dramaSchema = z.object({
     example: "8ef54669-8b92-c53e-e563-5f60405dde24",
     description: "ドラマのID",
   }),
+  title: z.string().min(0).openapi({
+    example: "ドラマタイトル",
+    description: "ドラマのタイトルです",
+  }),
   description: z.string().min(0).openapi({
     example: "こんな感じのドラマです",
     description: "ドラマの説明",
   }),
+  casts: z.array(z.string()).openapi({
+    example: ["田中太郎", "山田二郎"],
+    description: "ドラマの出演者",
+  }),
+  director: z
+    .array(z.string())
+    .openapi({ example: ["鈴木一郎", "佐藤二朗"], description: "演出家など" }),
+  thumbnail: z
+    .string()
+    .url()
+    .openapi({ example: "http://example.com", description: "ドラマ画像のURL" }),
   number_of_episodes: z
     .number()
     .positive()
