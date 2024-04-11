@@ -4,6 +4,7 @@ import { ID } from "../domain/value-objects/id";
 type ShowDramaDetailInput = {
   id: string;
 };
+
 type ShowDramaDetailOutput = {
   id: string;
   description: string;

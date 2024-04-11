@@ -17,10 +17,19 @@ const schema = createRoute({
     201: {
       content: {
         "application/json": {
-          schema: z.object({ message: z.literal("success") }),
+          schema: z.object({
+            id: z.string().uuid().openapi({
+              example: "8ef54669-8b92-c53e-e563-5f60405dde24",
+              description: "ユーザーID",
+            }),
+            name: z
+              .string()
+              .min(1)
+              .openapi({ example: "田中太郎", description: "ユーザー名" }),
+          }),
         },
       },
-      description: "コメント一覧を取得",
+      description: "成功時には成功レスポンスが返る",
     },
   },
 });
@@ -30,12 +39,12 @@ const route = new OpenAPIHono();
 route.openapi(schema, async (c) => {
   const { name } = c.req.valid("param");
 
-  await CreateUser(
+  const output = await CreateUser(
     { userRepository: new MemoryUserRepositoryImpl() },
     { name },
   );
 
-  return c.json({ message: "success" as const });
+  return c.json({ id: output.id, name: output.name });
 });
 
 export default route;

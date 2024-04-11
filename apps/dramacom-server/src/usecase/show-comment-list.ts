@@ -5,6 +5,7 @@ type ShowCommentListInput = {
   limit: number;
   start?: string;
 };
+
 type ShowCommentListOutput = {
   id: string;
   author: string;

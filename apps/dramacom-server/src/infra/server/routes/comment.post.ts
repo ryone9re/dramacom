@@ -1,7 +1,10 @@
 import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
-import { ShowCommentList } from "../../../usecase/show-comment-list";
-import { MemoryCommentRpositoryImpl } from "../../memory/memory-repository-impl";
-import { commentSchema } from "../schema/schema";
+import { PostComment } from "../../../usecase/post-comment";
+import {
+  MemoryCommentRpositoryImpl,
+  MemoryDramaRepositoryImpl,
+  MemoryUserRepositoryImpl,
+} from "../../memory/memory-repository-impl";
 
 const schema = createRoute({
   method: "post",
@@ -9,15 +12,23 @@ const schema = createRoute({
   request: {
     query: z
       .object({
-        limit: z.coerce
-          .number()
-          .int()
-          .positive()
-          .openapi({ example: 10, description: "取得上限" }),
-        start: z.optional(z.string().uuid()).openapi({
+        author: z.string().uuid().openapi({
           example: "8ef54669-8b92-c53e-e563-5f60405dde24",
-          description: "リストのはじめの要素のID",
+          description: "コメントした人のID",
         }),
+        targetUser: z.string().uuid().optional().openapi({
+          example: "8ef54669-8b92-c53e-e563-5f60405dde24",
+          description: "リプライ先のユーザーのID",
+        }),
+        targetDrama: z.string().uuid().openapi({
+          example: "8ef54669-8b92-c53e-e563-5f60405dde24",
+          description: "コメントするドラマのID",
+        }),
+        content: z.string().min(0).openapi({
+          example: "このドラマすごい面白い！",
+          description: "コメント内容",
+        }),
+        watchedEpisode: z.coerce.number().min(0),
       })
       .openapi("QueryParameters"),
   },
@@ -25,10 +36,12 @@ const schema = createRoute({
     201: {
       content: {
         "application/json": {
-          schema: z.array(commentSchema),
+          schema: z.object({
+            message: z.literal("success"),
+          }),
         },
       },
-      description: "コメント一覧を取得",
+      description: "成功メッセージが返る",
     },
   },
 });
@@ -36,23 +49,24 @@ const schema = createRoute({
 const route = new OpenAPIHono();
 
 route.openapi(schema, async (c) => {
-  const { limit, start } = c.req.valid("query");
+  const req = c.req.valid("query");
 
-  const output = await ShowCommentList(
-    { commentRepository: new MemoryCommentRpositoryImpl() },
-    { limit, start },
+  await PostComment(
+    {
+      commentRepository: new MemoryCommentRpositoryImpl(),
+      userRepository: new MemoryUserRepositoryImpl(),
+      dramaRepository: new MemoryDramaRepositoryImpl(),
+    },
+    {
+      author: req.author,
+      targetUser: req.targetUser,
+      targetDrama: req.targetDrama,
+      content: req.content,
+      watchedEpisode: req.watchedEpisode,
+    },
   );
 
-  return c.json(
-    output.map((v) => ({
-      id: v.id,
-      author: v.author,
-      targetUser: v.targetUser,
-      targetDrama: v.targetDrama,
-      content: v.content,
-      watchedEpisode: v.watchedEpisode,
-    })),
-  );
+  return c.json({ message: "success" as const });
 });
 
 export default route;
