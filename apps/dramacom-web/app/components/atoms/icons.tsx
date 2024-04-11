@@ -58,3 +58,56 @@ export const SearchIcon = () => {
     </svg>
   );
 };
+
+export const StarIcon = () => {
+  return (
+    <svg
+      fill="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      className="w-4 h-4 ml-1"
+      viewBox="0 0 24 24"
+    >
+      <path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2z"></path>
+    </svg>
+  );
+};
+
+export const PlayIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M5.25 6.75l10.5 5.25-10.5 5.25V6.75z"
+      />
+    </svg>
+  );
+};
+
+export const LikeIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M17.25 9c0-3.9-4.35-5.25-6.75-2.75C8.35 3.75 4 5.1 4 9c0 4 4 6.5 7.25 11.25.8.93 2.2.93 3 0C16 15.5 20 13 20 9z"
+      />
+    </svg>
+  );
+};
