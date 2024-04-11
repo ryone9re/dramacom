@@ -2,7 +2,7 @@
 import type React from "react";
 import DoramaCard from "~/components/molecules/DoramaCard";
 
-interface CardData {
+export interface CardData {
   id: number;
   title: string;
   imageSrc: string;
