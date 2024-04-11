@@ -47,8 +47,7 @@ export class MemoryDramaRepositoryImpl implements DramaRepository {
     if (start) {
       startIndex = this.memory.findIndex((v) => v.identity().equals(start));
       if (startIndex < 0) {
-        // TODO エラー実装
-        throw new Error("Drama Not Found");
+        return [];
       }
     }
     return this.memory.slice(startIndex, startIndex + limit);
