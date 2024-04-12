@@ -24,7 +24,7 @@ export const dramaSchema = z.object({
     .string()
     .url()
     .openapi({ example: "http://example.com", description: "ドラマ画像のURL" }),
-  number_of_episodes: z
+  numberOfEpisodes: z
     .number()
     .positive()
     .openapi({ example: 13, description: "何話あるか" }),
