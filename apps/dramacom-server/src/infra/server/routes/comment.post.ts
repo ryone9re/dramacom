@@ -1,5 +1,8 @@
 import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
+import { HTTPException } from "hono/http-exception";
+import type { StatusCode } from "hono/utils/http-status";
 import { PostComment } from "../../../usecase/post-comment";
+import { UsecaseError } from "../../../usecase/usecase-error";
 import {
   MemoryCommentRpositoryImpl,
   MemoryDramaRepositoryImpl,
@@ -51,22 +54,32 @@ const route = new OpenAPIHono();
 route.openapi(schema, async (c) => {
   const req = c.req.valid("query");
 
-  await PostComment(
-    {
-      commentRepository: new MemoryCommentRpositoryImpl(),
-      userRepository: new MemoryUserRepositoryImpl(),
-      dramaRepository: new MemoryDramaRepositoryImpl(),
-    },
-    {
-      author: req.author,
-      targetUser: req.targetUser,
-      targetDrama: req.targetDrama,
-      content: req.content,
-      watchedEpisode: req.watchedEpisode,
-    },
-  );
+  try {
+    await PostComment(
+      {
+        commentRepository: new MemoryCommentRpositoryImpl(),
+        userRepository: new MemoryUserRepositoryImpl(),
+        dramaRepository: new MemoryDramaRepositoryImpl(),
+      },
+      {
+        author: req.author,
+        targetUser: req.targetUser,
+        targetDrama: req.targetDrama,
+        content: req.content,
+        watchedEpisode: req.watchedEpisode,
+      },
+    );
 
-  return c.json({ message: "success" as const });
+    return c.json({ message: "success" as const });
+  } catch (e) {
+    if (e instanceof UsecaseError) {
+      throw new HTTPException(e.httpHints as StatusCode, {
+        message: e.message,
+      });
+    }
+
+    throw e;
+  }
 });
 
 export default route;

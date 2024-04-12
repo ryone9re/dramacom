@@ -4,7 +4,7 @@ import type { User } from "../../domain/models/user";
 import type { CommentRepository } from "../../domain/repositories/comment-repository";
 import type { DramaRepository } from "../../domain/repositories/drama-repository";
 import type { UserRepository } from "../../domain/repositories/user-repository";
-import type { ID } from "../../domain/value-objects/id";
+import { ID } from "../../domain/value-objects/id";
 
 // Drama.new({
 //   title: "",
@@ -20,7 +20,8 @@ export class MemoryDramaRepositoryImpl implements DramaRepository {
 
   constructor() {
     this.memory = [
-      Drama.new({
+      new Drama({
+        id: new ID("ed08e30a-dcb8-2f38-9cd7-bb34b462be7e"),
         title: "虎に翼",
         description:
           "伊藤沙莉主演で、日本初の女性弁護士で後に裁判官となった一人の女性を描く。昭和のはじめ、日本初の女性専門に法律を教える学校ができ、寅子(伊藤)らは自らの道を切り開くため法律を学んでいく。しかし、昭和13(1938)年、卒業し弁護士として世に出た彼女たちを待ち受けていたのは戦争に向かう日本だった。",
@@ -29,7 +30,8 @@ export class MemoryDramaRepositoryImpl implements DramaRepository {
         thumbnail: "https://thetv.jp/i/pgw/program_images/0001000531_11_v.jpg",
         numberOfEpisodes: 2,
       }),
-      Drama.new({
+      new Drama({
+        id: new ID("922652a3-5380-4989-c8a1-84254d998fe1"),
         title: "シークレット同盟",
         description:
           "Leroによる韓国発の同名漫画を松井愛莉主演で実写ドラマ化。大学内でも一目置かれるイケメン女子・詩杏(松井)は、男性恐怖症と母親の過干渉という悩みを抱えている。そんな詩杏の前に、突如現れた容姿端麗な大学の後輩・律子(長野凌大)。親切な彼女は、実は詩杏に好意を寄せるストーカーだった。",

@@ -31,6 +31,7 @@ const CardContainer: React.FC<CardContainerProps> = ({
         {cards.map((card) => (
           <DoramaCard
             key={card.id}
+            id={card.id}
             title={card.title}
             imageSrc={card.imageSrc}
             rating={card.rating}

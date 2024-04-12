@@ -4,6 +4,7 @@ import type { CommentRepository } from "../domain/repositories/comment-repositor
 import type { DramaRepository } from "../domain/repositories/drama-repository";
 import type { UserRepository } from "../domain/repositories/user-repository";
 import { ID } from "../domain/value-objects/id";
+import { UsecaseError } from "./usecase-error";
 
 type PostCommentInput = {
   author: string;
@@ -25,8 +26,7 @@ export async function PostComment(
     new ID(input.author),
   );
   if (!author) {
-    // TODO エラー作成
-    throw new Error("Author Not Found");
+    throw new UsecaseError(400, "Author Not Found");
   }
 
   let targetUser: User | null = null;
@@ -35,8 +35,7 @@ export async function PostComment(
       new ID(input.targetUser),
     );
     if (!targetUser) {
-      // TODO エラー作成
-      throw new Error("User Not Found");
+      throw new UsecaseError(400, "User Not Found");
     }
   }
 
@@ -44,8 +43,7 @@ export async function PostComment(
     new ID(input.targetDrama),
   );
   if (!targetDrama) {
-    // TODO エラー作成
-    throw new Error("Drama Not Found");
+    throw new UsecaseError(400, "Drama Not Found");
   }
 
   const newComment = Comment.new({

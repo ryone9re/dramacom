@@ -1,8 +1,4 @@
-import type {
-  LoaderFunction,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import SearchBar from "~/components/molecules/SearchBar";
 import CardContainer, {
@@ -20,10 +16,8 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader: LoaderFunction = async ({
-  context,
-}: LoaderFunctionArgs) => {
-  type FetchData = {
+export async function loader({ context }: LoaderFunctionArgs) {
+  type fetchData = {
     id: string;
     title: string;
     description: string;
@@ -38,7 +32,7 @@ export const loader: LoaderFunction = async ({
     context.cloudflare.env.SERVER_URL + endpoint_path,
   );
 
-  const data = await response.json<FetchData>();
+  const data = await response.json<fetchData>();
   return data.map(
     (v) =>
       ({
@@ -49,10 +43,10 @@ export const loader: LoaderFunction = async ({
         description: v.description,
       }) satisfies CardData,
   );
-};
+}
 
 export default function Index() {
-  const data = useLoaderData<CardData[]>();
+  const data = useLoaderData<typeof loader>();
 
   return (
     <MainLayout>
