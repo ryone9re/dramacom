@@ -13,7 +13,12 @@ type ShowDramaListOutput = {
   casts: string[];
   director: string[];
   thumbnail: string;
-  numberOfEpisodes: number;
+  episodes: {
+    id: string;
+    episodeNumber: number;
+    title: string;
+    summary: string;
+  }[];
 }[];
 
 export async function ShowDramaList(
@@ -32,7 +37,12 @@ export async function ShowDramaList(
     casts: v.casts(),
     director: v.director(),
     thumbnail: v.thumbnail(),
-    numberOfEpisodes: v.numberOfEpisodes(),
+    episodes: v.episodes().map((episode) => ({
+      id: episode.identity().value(),
+      episodeNumber: episode.episodeNumber(),
+      title: episode.title(),
+      summary: episode.summary(),
+    })),
   }));
 
   return showDramaListOutput;

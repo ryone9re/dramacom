@@ -47,7 +47,7 @@ route.openapi(schema, async (c) => {
       casts: output.casts,
       director: output.director,
       thumbnail: output.thumbnail,
-      numberOfEpisodes: output.numberOfEpisodes,
+      episodes: output.episodes,
     });
   } catch (e) {
     if (e instanceof UsecaseError) {
