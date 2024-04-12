@@ -2,6 +2,7 @@ import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { json, useLoaderData } from "@remix-run/react";
 import DoramaDetailCard from "~/components/organisms/drama/DramaDetailCard";
 import EpisodeList from "~/components/organisms/drama/DramaEpisodeList";
+import MainLayout from "~/components/templates/layout/MainLayout";
 
 export async function loader({ context, params }: LoaderFunctionArgs) {
   type fetchData = {
@@ -50,9 +51,9 @@ export default function Page() {
   const { dramaDetail, episodes } = useLoaderData<typeof loader>();
 
   return (
-    <>
+    <MainLayout>
       <DoramaDetailCard {...dramaDetail} />
       <EpisodeList dramaId={dramaDetail.id} episodes={episodes} />
-    </>
+    </MainLayout>
   );
 }
