@@ -1,22 +1,24 @@
 import type React from "react";
 import { LikeIcon, PlayIcon, StarIcon } from "~/components/atoms/icons";
+import type { Drama } from "~/types";
 
-interface DoramaDetailCardProps {
-  title: string;
+export type DoramaDetailCardProps = {
+  title: Drama["title"];
+  thumbnail: Drama["thumbnail"];
+  description: Drama["description"];
+  casts: Drama["casts"];
+  director: Drama["director"];
   subTitle?: string;
-  imageSrc: string;
   rating: number;
-  description: string;
   screenplay?: string;
-  director?: string;
   genres?: string[];
   releaseYear?: number;
-}
+};
 
 const DoramaDetailCard: React.FC<DoramaDetailCardProps> = ({
   title,
   subTitle,
-  imageSrc,
+  thumbnail: imageSrc,
   rating,
   description,
   screenplay,

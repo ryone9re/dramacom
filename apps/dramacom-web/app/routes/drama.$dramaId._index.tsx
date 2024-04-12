@@ -3,17 +3,10 @@ import { json, useLoaderData } from "@remix-run/react";
 import DoramaDetailCard from "~/components/organisms/drama/DramaDetailCard";
 import EpisodeList from "~/components/organisms/drama/DramaEpisodeList";
 import MainLayout from "~/components/templates/layout/MainLayout";
+import type { Drama } from "~/types";
 
 export async function loader({ context, params }: LoaderFunctionArgs) {
-  type fetchData = {
-    id: string;
-    title: string;
-    description: string;
-    casts: string[];
-    director: string[];
-    thumbnail: string;
-    numberOfEpisodes: number;
-  };
+  type fetchData = Drama;
 
   const endpoint_path = `/api/drama/${params.dramaId}`;
   const response = await fetch(
@@ -39,21 +32,27 @@ export async function loader({ context, params }: LoaderFunctionArgs) {
     dramaDetail: {
       id: fetchedDramaDetail.id,
       title: fetchedDramaDetail.title,
-      imageSrc: fetchedDramaDetail.thumbnail,
+      thumbnail: fetchedDramaDetail.thumbnail,
       rating: 4,
       description: fetchedDramaDetail.description,
+      casts: fetchedDramaDetail.casts,
+      director: fetchedDramaDetail.director,
+      episodes: fetchedDramaDetail.episodes.map((episode) => ({
+        number: episode.episodeNumber,
+        title: episode.title,
+        description: episode.summary,
+      })),
     },
-    episodes: episodeProps,
   });
 }
 
 export default function Page() {
-  const { dramaDetail, episodes } = useLoaderData<typeof loader>();
+  const { dramaDetail } = useLoaderData<typeof loader>();
 
   return (
     <MainLayout>
       <DoramaDetailCard {...dramaDetail} />
-      <EpisodeList dramaId={dramaDetail.id} episodes={episodes} />
+      <EpisodeList dramaId={dramaDetail.id} episodes={dramaDetail.episodes} />
     </MainLayout>
   );
 }
