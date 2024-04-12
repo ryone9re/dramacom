@@ -6,15 +6,6 @@ import type { DramaRepository } from "../../domain/repositories/drama-repository
 import type { UserRepository } from "../../domain/repositories/user-repository";
 import { ID } from "../../domain/value-objects/id";
 
-// Drama.new({
-//   title: "",
-//   description: "",
-//   casts: [""],
-//   director: [""],
-//   thumbnail: "",
-//   numberOfEpisodes: 23,
-// })
-
 export class MemoryDramaRepositoryImpl implements DramaRepository {
   private memory: Drama[];
 
