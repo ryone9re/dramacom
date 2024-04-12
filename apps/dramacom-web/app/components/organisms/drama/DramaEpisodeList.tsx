@@ -1,6 +1,6 @@
 import type React from "react";
 
-interface EpisodeProps {
+export interface EpisodeProps {
   number: number;
   title: string;
   description: string;

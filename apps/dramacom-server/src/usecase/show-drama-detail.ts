@@ -1,5 +1,6 @@
 import type { DramaRepository } from "../domain/repositories/drama-repository";
 import { ID } from "../domain/value-objects/id";
+import { UsecaseError } from "./usecase-error";
 
 type ShowDramaDetailInput = {
   id: string;
@@ -23,8 +24,7 @@ export async function ShowDramaDetail(
 ): Promise<ShowDramaDetailOutput> {
   const output = await repositories.dramaRepository.findByID(new ID(input.id));
   if (!output) {
-    // TODO エラー作成
-    throw new Error("Drama Not Found");
+    throw new UsecaseError(400, "Drama Not Found");
   }
 
   return {
