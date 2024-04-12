@@ -14,3 +14,12 @@ export type Drama = {
   thumbnail: string;
   episodes: DramaEpisode[];
 };
+
+export type Comment = {
+  id: string;
+  author: string;
+  targetUser: string;
+  targetDrama: string;
+  content: string;
+  watchedEpisode: number;
+};

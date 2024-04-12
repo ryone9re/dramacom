@@ -1,4 +1,3 @@
-import type React from "react";
 import { useState, type FormEvent } from "react";
 
 interface Comment {
@@ -10,9 +9,17 @@ interface Comment {
   watchedEpisode: number;
 }
 
-const CommentsSection: React.FC = () => {
-  const [comments, setComments] = useState<Comment[]>([]);
+export function CommentsSection({
+  latestEpisodeNumber,
+  comments,
+}: { latestEpisodeNumber: number; comments: Comment[] }) {
+  const [displayCommentEpisodeNumber, setDisplayCommentEpisodeNumber] =
+    useState(latestEpisodeNumber);
   const [commentText, setCommentText] = useState<string>("");
+
+  const filteredComments = comments.filter(
+    (v) => v.watchedEpisode <= displayCommentEpisodeNumber,
+  );
 
   const handleCommentSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -21,18 +28,27 @@ const CommentsSection: React.FC = () => {
 
   return (
     <div className="comments-section space-y-4">
-      <div className="comment-list space-y-2">
-        {comments.map((comment, index) => (
-          <div key={comment.id} className="comment p-2 bg-base-200 rounded">
-            <p className="text-sm font-bold">{comment.author}</p>
-            <p className="text-sm">{comment.content}</p>
-          </div>
-        ))}
-      </div>
       <form onSubmit={handleCommentSubmit}>
         <div className="flex justify-between items-center my-5">
           <p className="text-lg">レビュー</p>
-          <select className="select select-bordered w-1/4" />
+          <select
+            className="select select-bordered w-1/4"
+            defaultValue={displayCommentEpisodeNumber}
+            onChange={(e) =>
+              setDisplayCommentEpisodeNumber(
+                Number.parseInt(e.currentTarget.value),
+              )
+            }
+          >
+            <option key="0" value={0}>
+              ネタバレ無し
+            </option>
+            {[...Array(latestEpisodeNumber)].map((_, i) => (
+              <option key={String(i + 1)} value={i + 1}>
+                {i + 1}話
+              </option>
+            ))}
+          </select>
         </div>
         <div className="flex w-full p-5 bg-darkgray rounded-xl">
           <input
@@ -47,8 +63,14 @@ const CommentsSection: React.FC = () => {
           </button>
         </div>
       </form>
+      <div className="comment-list space-y-2">
+        {filteredComments.map((comment) => (
+          <div key={comment.id} className="comment p-2 bg-base-200 rounded">
+            <p className="text-sm font-bold">{comment.author}</p>
+            <p className="text-sm">{comment.content}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
-
-export default CommentsSection;
+}
