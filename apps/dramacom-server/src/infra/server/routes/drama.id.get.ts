@@ -43,7 +43,7 @@ route.openapi(schema, async (c) => {
     casts: output.casts,
     director: output.director,
     thumbnail: output.thumbnail,
-    number_of_episodes: output.numberOfEpisodes,
+    numberOfEpisodes: output.numberOfEpisodes,
   });
 });
 
