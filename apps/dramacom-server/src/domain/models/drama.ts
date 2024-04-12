@@ -8,7 +8,7 @@ export class Drama implements Entity<ID> {
   private _casts: string[];
   private _director: string[];
   private _thumbnail: string;
-  private _numberOfEpisodes: number;
+  private _episodes: DramaEpisode[];
 
   constructor({
     id,
@@ -17,7 +17,7 @@ export class Drama implements Entity<ID> {
     casts,
     director,
     thumbnail,
-    numberOfEpisodes,
+    episodes,
   }: {
     id: ID;
     title: string;
@@ -25,7 +25,7 @@ export class Drama implements Entity<ID> {
     casts: string[];
     director: string[];
     thumbnail: string;
-    numberOfEpisodes: number;
+    episodes: DramaEpisode[];
   }) {
     this._id = id;
     this._title = title;
@@ -35,7 +35,7 @@ export class Drama implements Entity<ID> {
     this._casts = casts;
     this._director = director;
     this._thumbnail = thumbnail;
-    this._numberOfEpisodes = numberOfEpisodes;
+    this._episodes = episodes;
   }
 
   public static new({
@@ -44,14 +44,14 @@ export class Drama implements Entity<ID> {
     casts,
     director,
     thumbnail,
-    numberOfEpisodes,
+    episodes,
   }: {
     title: string;
     description?: string;
     casts: string[];
     director: string[];
     thumbnail: string;
-    numberOfEpisodes: number;
+    episodes: DramaEpisode[];
   }) {
     return new Drama({
       id: ID.generate(),
@@ -60,7 +60,7 @@ export class Drama implements Entity<ID> {
       casts,
       director,
       thumbnail,
-      numberOfEpisodes,
+      episodes,
     });
   }
 
@@ -92,7 +92,59 @@ export class Drama implements Entity<ID> {
     return this._thumbnail;
   }
 
-  public numberOfEpisodes() {
-    return this._numberOfEpisodes;
+  public episodes() {
+    return this._episodes;
+  }
+}
+
+export class DramaEpisode implements Entity<ID> {
+  private _id: ID;
+  private _episodeNumber: number;
+  private _title: string;
+  private _summary: string;
+
+  constructor({
+    id,
+    episodeNumber,
+    title,
+    summary,
+  }: { id: ID; episodeNumber: number; title: string; summary: string }) {
+    this._id = id;
+    this._episodeNumber = episodeNumber;
+    this._title = title;
+    this._summary = summary;
+  }
+
+  public static new({
+    episodeNumber,
+    title,
+    summary,
+  }: { episodeNumber: number; title: string; summary: string }) {
+    return new DramaEpisode({
+      id: ID.generate(),
+      episodeNumber,
+      title,
+      summary,
+    });
+  }
+
+  public identity(): ID {
+    return this._id;
+  }
+
+  public equal(other: Entity<ID>): boolean {
+    return this.identity().equals(other.identity());
+  }
+
+  public episodeNumber() {
+    return this._episodeNumber;
+  }
+
+  public title() {
+    return this._title;
+  }
+
+  public summary() {
+    return this._summary;
   }
 }

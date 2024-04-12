@@ -1,5 +1,24 @@
 import { z } from "@hono/zod-openapi";
 
+export const dramaEpisodeSchema = z.object({
+  id: z.string().uuid().openapi({
+    example: "8ef54669-8b92-c53e-e563-5f60405dde24",
+    description: "ドラマの各エピソードのID",
+  }),
+  episodeNumber: z.coerce
+    .number()
+    .int()
+    .positive()
+    .openapi({ example: 1, description: "ドラマの話数" }),
+  title: z
+    .string()
+    .openapi({ example: "物語の始まり", description: "エピソードのタイトル" }),
+  summary: z.string().openapi({
+    example: "おじいさんは山へ芝刈りに行きました。",
+    description: "あらすじ",
+  }),
+});
+
 export const dramaSchema = z.object({
   id: z.string().uuid().openapi({
     example: "8ef54669-8b92-c53e-e563-5f60405dde24",
@@ -24,10 +43,23 @@ export const dramaSchema = z.object({
     .string()
     .url()
     .openapi({ example: "http://example.com", description: "ドラマ画像のURL" }),
-  numberOfEpisodes: z
-    .number()
-    .positive()
-    .openapi({ example: 13, description: "何話あるか" }),
+  episodes: z.array(dramaEpisodeSchema).openapi("DramaEpisode", {
+    example: [
+      {
+        id: "3ced24ad-e5b3-4b51-217e-2cb79f205a07",
+        title: "物語が始まる...",
+        episodeNumber: 1,
+        summary: "物語が始まるらしい...",
+      },
+      {
+        id: "4ced24ad-e5b3-4b51-217e-2cb79f205a07",
+        title: "物語が始まった...",
+        episodeNumber: 2,
+        summary: "物語が始まったらしい...",
+      },
+    ],
+    description: "ドラマの各話",
+  }),
 });
 
 export const userSchema = z.object({

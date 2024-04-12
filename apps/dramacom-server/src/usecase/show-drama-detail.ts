@@ -13,7 +13,12 @@ type ShowDramaDetailOutput = {
   casts: string[];
   director: string[];
   thumbnail: string;
-  numberOfEpisodes: number;
+  episodes: {
+    id: string;
+    episodeNumber: number;
+    title: string;
+    summary: string;
+  }[];
 };
 
 export async function ShowDramaDetail(
@@ -34,6 +39,11 @@ export async function ShowDramaDetail(
     casts: output.casts(),
     director: output.director(),
     thumbnail: output.thumbnail(),
-    numberOfEpisodes: output.numberOfEpisodes(),
+    episodes: output.episodes().map((episode) => ({
+      id: episode.identity().value(),
+      episodeNumber: episode.episodeNumber(),
+      title: episode.title(),
+      summary: episode.summary(),
+    })),
   };
 }

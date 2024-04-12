@@ -1,5 +1,5 @@
 import type { Comment } from "../../domain/models/comment";
-import { Drama } from "../../domain/models/drama";
+import { Drama, DramaEpisode } from "../../domain/models/drama";
 import type { User } from "../../domain/models/user";
 import type { CommentRepository } from "../../domain/repositories/comment-repository";
 import type { DramaRepository } from "../../domain/repositories/drama-repository";
@@ -19,7 +19,20 @@ export class MemoryDramaRepositoryImpl implements DramaRepository {
         casts: ["尾野真千子", "伊藤沙莉", "石田ゆり子", "岡部たけし"],
         director: ["吉田恵里香", "梛川善郎"],
         thumbnail: "https://thetv.jp/i/pgw/program_images/0001000531_11_v.jpg",
-        numberOfEpisodes: 2,
+        episodes: [
+          new DramaEpisode({
+            id: new ID("3ced24ad-e5b3-4b51-217e-2cb79f205a07"),
+            title: "物語が始まる...",
+            episodeNumber: 1,
+            summary: "物語が始まるらしい...",
+          }),
+          new DramaEpisode({
+            id: new ID("4ced24ad-e5b3-4b51-217e-2cb79f205a07"),
+            title: "物語が始まった...",
+            episodeNumber: 2,
+            summary: "物語が始まったらしい...",
+          }),
+        ],
       }),
       new Drama({
         id: new ID("922652a3-5380-4989-c8a1-84254d998fe1"),
@@ -30,7 +43,26 @@ export class MemoryDramaRepositoryImpl implements DramaRepository {
         director: ["レロ", "本田隆一", "大山晃一郎", "山崎佐保子", "合田純奈"],
         thumbnail:
           "https://thetv.jp/i/pgw/series_images/0001004362_v.jpg?w=716",
-        numberOfEpisodes: 12,
+        episodes: [
+          new DramaEpisode({
+            id: new ID("3ced24ad-e5b3-4b51-217e-2cb79f205a07"),
+            title: "物語が始まる...",
+            episodeNumber: 1,
+            summary: "物語が始まるらしい...",
+          }),
+          new DramaEpisode({
+            id: new ID("4ced24ad-e5b3-4b51-217e-2cb79f205a07"),
+            title: "物語が始まった...",
+            episodeNumber: 2,
+            summary: "物語が始まったらしい...",
+          }),
+          new DramaEpisode({
+            id: new ID("5ced24ad-e5b3-4b51-217e-2cb79f205a07"),
+            title: "物語が始まっている...",
+            episodeNumber: 3,
+            summary: "物語が始まっているらしい...",
+          }),
+        ],
       }),
     ];
   }
