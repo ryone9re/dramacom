@@ -159,12 +159,12 @@ export class MemoryDramaRepositoryImpl implements DramaRepository {
       }),
       new Drama({
         id: new ID("dd08e40b-dcb8-2f38-9cd7-bb34b462bf8f"),
-        title: "花咲舞が黙ってない",
+        title: "ファーストステップ",
         description:
-          "新シリーズで今田さんが演じる花咲舞は、大手銀行の窓口係から突然、本部の臨店班に異動になり、毎回訪問する支店で巻き起こる事件や不祥事をスッキリ、ズバッと見事に解決していく。 不正を絶対に見て見ぬふりできない花咲舞は、弱い立場の人たちのために立ち上がる痛快エンターテインメント作品となる。",
+          "このドラマは、外務省開発協力広報動画「フロントランナー～世界の未来を作る日本人たち～」の関連事業として、国際協力の最前線で活躍する日本人に焦点を当てたドラマです。 日本から世界へと広まった母子健康手帳。それは私たちが母体に生命を宿してから最初の1000日の記録。",
         casts: ["窪田正孝", "有村架純", "小池徹平", "松雪泰子"],
         director: ["金子修介", "田中光敏"],
-        thumbnail: "https://www.ntv.co.jp/hanasakimai1/images/og_image.jpg",
+        thumbnail: "https://bsyoshimoto.s3.ap-northeast-1.amazonaws.com/program/th/program_image_firststep.jpg",
         episodes: [
           new DramaEpisode({
             id: new ID("1ced24ad-e5b3-4b51-217e-2cb79f205a12"),
@@ -178,7 +178,12 @@ export class MemoryDramaRepositoryImpl implements DramaRepository {
             episodeNumber: 2,
             summary: "最初の患者に試みられる新治療。",
           }),
-          // 追加エピソード情報...
+          new DramaEpisode({
+            id: new ID("3ced24ad-e5b3-4b51-217e-2cb79f205a14"),
+            title: "新たなる希望",
+            episodeNumber: 3,
+            summary: "新治療法の開発が始まる。",
+          }),
         ],
       }),
     ];
