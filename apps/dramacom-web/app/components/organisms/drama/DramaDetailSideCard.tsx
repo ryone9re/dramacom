@@ -10,8 +10,8 @@ export const DramaDetailSideCard: React.FC<DoramaDetailCardProps> = ({
         src={props.thumbnail}
         alt={props.title}
       />
-      <h1 className="text-2xl font-bold">{props.title}</h1>
-      <p className="text-lg">{props.description}</p>
+      <h1 className="text-2xl font-bold mt-4 mb-2 px-2">{props.title}</h1>
+      <p className="text-lg pb-2 px-2">{props.description}</p>
     </div>
   );
 };
